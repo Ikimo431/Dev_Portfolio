@@ -1,0 +1,66 @@
+.site-info{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    
+
+}
+.siteinfo-col{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: left;
+    gap: 10%;
+    align-items: center;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+.siteHeader {
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 1rem;
+    padding-right: 3rem;
+}
+
+a {
+    text-decoration: underline;
+    color: white;
+    font-size: 2.25rem;
+}
+.slider{
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+     
+    width: 100%;
+   
+}
+.slider > * {
+    width: 100%;
+    flex-shrink: 0;
+    
+}
+.about-site{
+    position: relative;
+    width: 65vw;
+    overflow: hidden;
+    padding-block: 1rem;
+    border-radius: 1rem;
+    padding-left: 1rem;
+    button {
+        padding: .25rem;
+        border-radius: .5rem;
+    }
+}
+p, li, button{
+    font-size: 2rem;
+}
+.button-row {
+    display: flex;
+    height: auto;
+    align-items: center;
+    justify-content: space-around;
+}
+h3 {
+    font-size: 5rem;
+}

@@ -6,11 +6,12 @@ type ImageGalleryProps = {
     images: string[]
     altPrefix?: string
     bgColor?: string
+    folder?: string
 }
 
 
 
-export default function ImageGallery({images, altPrefix = 'Gallery Image', bgColor = "gray"}: ImageGalleryProps){
+export default function ImageGallery({images, altPrefix = 'Gallery Image', bgColor = "gray", folder=""}: ImageGalleryProps){
 
     const [currIndex, setCurrIndex] = useState(0)
     const numImages = images.length
@@ -21,7 +22,7 @@ export default function ImageGallery({images, altPrefix = 'Gallery Image', bgCol
     function nextImage() {
         setCurrIndex((next) => next===numImages-1? 0 : next+1)
     }
-    
+    console.log(`../assets/images/${folder!=""? folder + '/' : folder}${images[0]}`)
     return (
         <div className = 'img-slider' style={{backgroundColor: bgColor}}>
             <div className = 'slider-track'
@@ -31,7 +32,7 @@ export default function ImageGallery({images, altPrefix = 'Gallery Image', bgCol
                 {images.map((_, index)=>(
                     <img 
                         key = {index}
-                        src = {new URL(`../assets/images/${images[index]}`, import.meta.url).href} 
+                        src = {new URL(`/src/assets/images/${images[index]}`, import.meta.url).href} 
                         loading = "lazy"
                         alt = {`${altPrefix} ${currIndex+1}`}
                     />
