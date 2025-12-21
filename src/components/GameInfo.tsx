@@ -30,7 +30,7 @@ export default function GameInfo({title, images, description, bulletpoints, link
             </div>
             
             <div className="gameinfo-row" style = {{backgroundColor: galleryBg}}>
-                <ImageGallery images={images} altPrefix={title}></ImageGallery>
+                <ImageGallery images={images} altPrefix={title} bgColor={galleryBg}></ImageGallery>
                 <div className='about-game' style={{backgroundColor: infoBg}} >
                     <nav className = 'button-row' style={{backgroundColor: infoBg}}>
                         <button className = 'headerButton' onClick={()=>setInfoIndex(0)} style={{backgroundColor: buttonBg}}>Description</button>

@@ -13,8 +13,8 @@ function App() {
           <div className='about'>
             <h2>Owen Johnston</h2>
           <p>I am a senior studying computer science at Carroll University, with minors in math and art. Programming is my strongsuit, 
-            and I chose an art minor to broaden my skillset and improve one of my weak points in game development. This portfolio contains just my game work, for  
-            more specific information on my skillsets and to see my non-game projects, view my full portfolio <a href='https://ikimo431.github.io/Portfolio-Site/index.html'>here.</a>
+            and I chose an art minor to broaden my skillset and improve one of my weak points in game development. This page contains a few of my games and websites. 
+            For more specific information about my skills, visit my portfolio homepage <a href='https://ikimo431.github.io/Portfolio-Site/index.html'>here.</a>
           </p>
           </div>
           
@@ -25,7 +25,7 @@ function App() {
             <li>Contact Me: owenj120@gmail.com</li>
           </ul>
         </section>
-        <div style={{display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem"}}>
+        <div style={{display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem", backgroundColor: "#334b80"}}>
             <button id="games" style = {{borderRadius: ".35rem"}}onClick={()=>{setSectionIndex(0)}}>Games</button>
             <button id="websites" style = {{borderRadius: ".35rem"}} onClick={()=>{setSectionIndex(1)}}>Websites</button>
           </div>
@@ -68,8 +68,9 @@ function App() {
               the portal includes an admin panel for IT to manage recording permissions by building. The portal was also made with support for dynamic routing of NDI sources to support 
               the university's planned switch to NDI cameras`} 
               bulletpoints={["Made using the Next.js React frameowrk and MySQL database", "Utilized the NDI SDK to create router application in C++", 
-              "Authentication handled with orginization's SSO using Microsoft Authentication Library", "Integrated with YuJa API to handle doing the recording"]}>
-
+              "Authentication handled with orginization's SSO using Microsoft Authentication Library", "Integrated with YuJa API to handle doing the recording"]}
+              mainBg='#1b3c80' headerBg='#122a5c' galleryBg='#1b3c80' infoBg='#e56824'>
+                  
             </WebsiteInfo>
           </section>
         </div>

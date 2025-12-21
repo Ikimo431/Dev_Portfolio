@@ -28,7 +28,7 @@ export default function GameInfo({title, images, description, bulletpoints, link
             </div>
             
             <div className="siteinfo-col" style = {{backgroundColor: galleryBg}}>
-                <ImageGallery folder = "websites" images={images} altPrefix={title}></ImageGallery>
+                <ImageGallery folder = "websites" images={images} altPrefix={title} bgColor={galleryBg}></ImageGallery>
                 <div className='about-site' style={{backgroundColor: infoBg}} >
                     <nav className = 'button-row' style={{backgroundColor: infoBg}}>
                         <button className = 'headerButton' onClick={()=>setInfoIndex(0)} style={{backgroundColor: buttonBg}}>Description</button>
