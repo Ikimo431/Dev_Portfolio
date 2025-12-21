@@ -4,6 +4,7 @@ import GameInfo from './components/GameInfo'
 import WebsiteInfo from './components/WebsiteInfo'
 
 function App() {
+  //const base = import.meta.env.BASE_URL
   const images = ["title.png", "room.png", "battle.png"]
   const [sectionIndex, setSectionIndex] = useState(0)
   const bulletpoints = ["Made using gamemaker", "Card based combat with fluid animation", "Sprites made using LibreSprite", "Original music made with LMMS"]
