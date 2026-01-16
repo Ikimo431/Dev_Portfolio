@@ -1,0 +1,15 @@
+.devLogLabel{
+    font-size: 2rem;
+    padding: 2rem 1em 2rem 1rem;
+    color: white;
+}
+.logCarrot{
+
+}
+.devLog{
+    padding: 2rem 0;
+}
+.logEntry{
+    color:white;
+    padding-left: 2rem;
+}

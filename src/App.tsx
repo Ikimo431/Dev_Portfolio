@@ -2,12 +2,12 @@ import { useState } from 'react'
 import './App.css'
 import GameInfo from './components/GameInfo'
 import WebsiteInfo from './components/WebsiteInfo'
+import DevLog from './components/DevLog'
 
 function App() {
   //const base = import.meta.env.BASE_URL
-  const images = ["title.png", "room.png", "battle.png"]
+
   const [sectionIndex, setSectionIndex] = useState(0)
-  const bulletpoints = ["Made using gamemaker", "Card based combat with fluid animation", "Sprites made using LibreSprite", "Original music made with LMMS"]
   return (
     <div className='main'>
         <section id="aboutme">
@@ -27,8 +27,8 @@ function App() {
           </ul>
         </section>
         <div style={{display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem", backgroundColor: "#334b80"}}>
-            <button id="games" style = {{borderRadius: ".35rem"}}onClick={()=>{setSectionIndex(0)}}>Games</button>
-            <button id="websites" style = {{borderRadius: ".35rem"}} onClick={()=>{setSectionIndex(1)}}>Websites</button>
+            <button id="games" style = {{borderRadius: ".35rem"}}onClick={()=>{setSectionIndex(0)}}>Websites</button>
+            <button id="websites" style = {{borderRadius: ".35rem"}} onClick={()=>{setSectionIndex(1)}}>Games</button>
           </div>
         <div className = 'slider-parent'>
 
@@ -38,21 +38,7 @@ function App() {
           
           
 
-          <section id = "games">
-            <GameInfo title="Death's Janitor" description="Play as death's janitor in this deckbuilding RPG. Gain new cards and grow stronger as 
-                          you explore the crypts and clean up the undead." 
-            images={images} bulletpoints={bulletpoints} link="https://ikimo431.itch.io/deaths-janitor"
-            mainBg='#827e7d' headerBg='#735b30' galleryBg='#4d2020' infoBg='#733232'
-            caseStudy="Death'sJanitor_CaseStudyDTCT.pdf"
-            ></GameInfo>
-
-            <GameInfo title= "Rhythm Pillars" description = "Move and hit the pillars to the beat!" link="https://ikimo431.itch.io/rhythm-pillars"
-            images = {["RhythmPillarsTitle.png", "RhythmPillarsGif.gif", "RhythmPillarsEnd.png"]} bulletpoints={["Created using GameMaker", "Scripting done in GML", "Art and animations created using LibreSprite", 
-              "Music made in LMMS and Ableton Live"]}
-            mainBg='#431a54' headerBg='#956fa6' galleryBg='#654175' infoBg='#935bab' buttonBg='#b46cd1ff'
-              />
-
-          </section>
+          
 
           <section id = "websites">
             <WebsiteInfo title="MyPantry" images={["MyPantryDash.png", "SingleIngredient.gif", "RecipeAddClick.gif", "SaveShopping.gif"]} 
@@ -73,6 +59,35 @@ function App() {
               mainBg='#1b3c80' headerBg='#122a5c' galleryBg='#1b3c80' infoBg='#e56824'>
                   
             </WebsiteInfo>
+          </section>
+
+          <section id = "games">
+            <GameInfo title="Death's Janitor" description="Play as death's janitor in this deckbuilding RPG. Gain new cards and grow stronger as 
+                          you explore the crypts and clean up the undead." 
+            images={["title.png", "room.png", "Death'sJanitorBattle.png"]} 
+            bulletpoints={["Made using gamemaker", "Card based combat with fluid animation", "Sprites made using LibreSprite", "Original music made with LMMS and Ableton Live"]} 
+            link="https://ikimo431.itch.io/deaths-janitor"
+            mainBg='#827e7d' headerBg='#735b30' galleryBg='#4d2020' infoBg='#733232'
+            caseStudy="Death'sJanitor_CaseStudyDTCT.pdf"
+            ></GameInfo>
+            <DevLog backgroundColor='#4d2020' entries={[
+            {
+              date: "01/03/2026",
+              bulletpoints: ["Created new animated battle idle sprites for undead knight and zombie", "Added battle_sprite variable to enemy parent to support using different sprite in battle"]
+            },
+            {
+              date: "01/09/2026",
+              bulletpoints: ["Added animated attack sprites for enemies", "Added new battle music", "Added new attack sound effects"]
+            }
+            ]}
+            />
+
+            <GameInfo title= "Rhythm Pillars" description = "Move and hit the pillars to the beat!" link="https://ikimo431.itch.io/rhythm-pillars"
+            images = {["RhythmPillarsTitle.png", "RhythmPillarsGif.gif", "RhythmPillarsEnd.png"]} bulletpoints={["Created using GameMaker", "Scripting done in GML", "Art and animations created using LibreSprite", 
+              "Music made in LMMS and Ableton Live"]}
+            mainBg='#431a54' headerBg='#956fa6' galleryBg='#654175' infoBg='#935bab' buttonBg='#b46cd1ff'
+              />
+
           </section>
         </div>
         </div>
