@@ -13,17 +13,18 @@ type GameInfoProps = {
     infoBg?: string
     buttonBg?: string
     caseStudy?: string
+    last?: boolean
 }
 
 export default function GameInfo({title, images, description, bulletpoints, link,
-    headerBg="gray", galleryBg="gray", mainBg="gray", infoBg = "gray", buttonBg="gray",
+    headerBg="gray", galleryBg="gray", mainBg="gray", infoBg = "gray", buttonBg="gray", last=false,
     caseStudy = undefined}: GameInfoProps){
     const [infoIndex, setInfoIndex] = useState(0)
     const [studyVisible, setStudyVisible] = useState(false)
 
     
     return (
-        <article className='game-info' style = {{backgroundColor: mainBg}}>
+        <article className={`game-info ${last? 'last' : ''}`} style = {{backgroundColor: mainBg}}>
             <div className='gameHeader' style={{backgroundColor: headerBg}}>
                 <h3 >{title}</h3>
                 <a href={link}>Itch.io link</a>

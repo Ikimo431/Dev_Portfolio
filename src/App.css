@@ -12,8 +12,8 @@
    
     
 }
-.about{
-    
+.main{
+    background-color: #5687d6;
 }
 #links{
     background-color: #7995d4;
@@ -30,7 +30,7 @@
 
 .section-slider {
     section {
-        max-width: 100%
+        max-width: 100%;
     }
     display: flex;
     transition: transform 0.5s ease-in-out;
@@ -39,6 +39,9 @@
 }
 .slider-parent{
     overflow-x: hidden
+}
+
+section > article:last-child{
     
 }
 

@@ -13,16 +13,16 @@ type GameInfoProps = {
     infoBg?: string
     buttonBg?: string
     headerFontColor?: string
-  
+    last?: boolean
 }
 
 export default function GameInfo({title, images, description, bulletpoints, link,
-    headerBg="gray", galleryBg="gray", mainBg="gray", infoBg = "gray", buttonBg="gray", headerFontColor = "black"
+    headerBg="gray", galleryBg="gray", mainBg="gray", infoBg = "gray", buttonBg="gray", headerFontColor = "black", last=false,
    }: GameInfoProps){
     const [infoIndex, setInfoIndex] = useState(0)
     
     return (
-        <article className='site-info' style = {{backgroundColor: mainBg}}>
+        <article className={`site-info ${last? 'last' : ''}`} style = {{backgroundColor: mainBg}}>
             <div className='siteHeader' style={{backgroundColor: headerBg}}>
                 <h3 style={{color: headerFontColor}} >{title}</h3>
                 {link? <a href={link}>Link</a> : null}
@@ -51,4 +51,6 @@ export default function GameInfo({title, images, description, bulletpoints, link
             
         </article>
     )
+
+    
 }

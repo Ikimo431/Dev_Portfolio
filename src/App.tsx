@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import GameInfo from './components/GameInfo'
 import WebsiteInfo from './components/WebsiteInfo'
@@ -8,6 +8,16 @@ function App() {
   //const base = import.meta.env.BASE_URL
 
   const [sectionIndex, setSectionIndex] = useState(0)
+
+  useEffect(()=> {
+        var container = document.querySelector('.slider-parent') as HTMLElement
+        if (!(container instanceof HTMLElement)) return
+        var slides = container.querySelectorAll(':scope > section') as NodeListOf<HTMLElement>
+        var slide = slides[sectionIndex]
+        if (!(slide instanceof HTMLElement)) return
+        container.style.height = slide.offsetHeight + 'px'
+  }, [sectionIndex])
+
   return (
     <div className='main'>
         <section id="aboutme">
@@ -57,7 +67,7 @@ function App() {
             You can track what ingredients you have available to filter recipes by what you have on hand, and add a recipe to a shopping list in a single click!`} 
             bulletpoints={["Made using the Next.js React frameowrk and MySQL", "Designed database structure and created with MySQL", 
             "authentication implemented using JSON Web Tokens, and Bcrypt for password hashing", "Utilized Docker to deploy project to an Ubuntu Server machine"]}
-            mainBg='#5687d6' headerBg='#5687d6' galleryBg = "#336ecc" infoBg='#8cade3ff' buttonBg='#5da9e8'>  
+            mainBg='#5687d6' headerBg='#5687d6' galleryBg = "#336ecc" infoBg='#8cade3ff' buttonBg='#5da9e8' last={true}>  
             </WebsiteInfo>
             
           </section>
@@ -86,7 +96,7 @@ function App() {
             <GameInfo title= "Rhythm Pillars" description = "Move and hit the pillars to the beat!" link="https://ikimo431.itch.io/rhythm-pillars"
             images = {["RhythmPillarsTitle.png", "RhythmPillarsGif.gif", "RhythmPillarsEnd.png"]} bulletpoints={["Created using GameMaker", "Scripting done in GML", "Art and animations created using LibreSprite", 
               "Music made in LMMS and Ableton Live"]}
-            mainBg='#431a54' headerBg='#956fa6' galleryBg='#654175' infoBg='#935bab' buttonBg='#b46cd1ff'
+            mainBg='#431a54' headerBg='#956fa6' galleryBg='#654175' infoBg='#935bab' buttonBg='#b46cd1ff' last={true}
               />
 
           </section>
@@ -96,6 +106,8 @@ function App() {
         
     </div>
   )
+
+ 
 }
 //test
 export default App
