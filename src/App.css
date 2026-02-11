@@ -41,3 +41,17 @@
     overflow-x: hidden
     
 }
+
+@media screen and (max-width:900px){
+    #aboutme{
+        flex-direction: column;
+        
+        h2{
+            font-size: 2rem;
+        }
+       
+    }
+    #links{
+        padding-bottom: 1.5rem;
+    }
+}

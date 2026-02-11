@@ -73,3 +73,9 @@
 .dot.active {
   background: #0f172a;
 }
+
+@media screen and (max-width:900px){
+    .img-slider{
+        max-width: 85%;
+    }
+}

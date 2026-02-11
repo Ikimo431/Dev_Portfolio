@@ -12,7 +12,7 @@ function App() {
     <div className='main'>
         <section id="aboutme">
           <div className='about'>
-            <h2>Owen Johnston</h2>
+          <h2>Owen Johnston</h2>
           <p>I am a senior studying computer science at Carroll University, with minors in math and art. Programming is my strongsuit, 
             and I chose an art minor to broaden my skillset and improve one of my weak points in game development. This page contains a few of my games and websites. 
             For more specific information about my skills, visit my portfolio homepage <a href='https://ikimo431.github.io/Portfolio-Site/index.html'>here.</a>
@@ -41,6 +41,17 @@ function App() {
           
 
           <section id = "websites">
+            <WebsiteInfo title={'Recording Scheduler Web Portal'} images={["ScheduledRecordingDiagram.gif", "AdhocRecordingDiagram.gif", 
+              "NDIHub_SelectDate.png", "NDIHub_InfoOptions.png", "NDIHub_AdminPanel.png"]} 
+              description={`A web portal for Carroll University staff and students to start and schedule recordings. Usable by staff and students, 
+              the portal includes an admin panel for IT to manage recording permissions by building. The portal was also made with support for dynamic routing of NDI sources to support 
+              the university's planned switch to NDI cameras`} 
+              bulletpoints={["Made using the Next.js React frameowrk and MySQL database", "Utilized the NDI SDK to create router application in C++", 
+              "Authentication handled with orginization's SSO using Microsoft Authentication Library", "Integrated with YuJa API to handle doing the recording"]}
+              mainBg='#1b3c80' headerBg='#122a5c' headerFontColor = "white" galleryBg='#1b3c80' infoBg='#e56824'>
+                  
+            </WebsiteInfo>
+
             <WebsiteInfo title="MyPantry" images={["MyPantryDash.png", "SingleIngredient.gif", "RecipeAddClick.gif", "SaveShopping.gif"]} 
             description={`MyPantry is a web applkkication for storing recipes and managing ingredients to make planning for cooking easier. 
             You can track what ingredients you have available to filter recipes by what you have on hand, and add a recipe to a shopping list in a single click!`} 
@@ -49,16 +60,6 @@ function App() {
             mainBg='#5687d6' headerBg='#5687d6' galleryBg = "#336ecc" infoBg='#8cade3ff' buttonBg='#5da9e8'>  
             </WebsiteInfo>
             
-            <WebsiteInfo title={'Recording Scheduler Web Portal'} images={["ScheduledRecordingDiagram.gif", "AdhocRecordingDiagram.gif", 
-              "NDIHub_SelectDate.png", "NDIHub_InfoOptions.png", "NDIHub_AdminPanel.png"]} 
-              description={`A web portal for Carroll University staff and students to start and schedule recordings. Usable by staff and students, 
-              the portal includes an admin panel for IT to manage recording permissions by building. The portal was also made with support for dynamic routing of NDI sources to support 
-              the university's planned switch to NDI cameras`} 
-              bulletpoints={["Made using the Next.js React frameowrk and MySQL database", "Utilized the NDI SDK to create router application in C++", 
-              "Authentication handled with orginization's SSO using Microsoft Authentication Library", "Integrated with YuJa API to handle doing the recording"]}
-              mainBg='#1b3c80' headerBg='#122a5c' galleryBg='#1b3c80' infoBg='#e56824'>
-                  
-            </WebsiteInfo>
           </section>
 
           <section id = "games">

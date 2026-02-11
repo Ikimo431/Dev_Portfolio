@@ -64,3 +64,18 @@ p, li, button{
 h3 {
     font-size: 5rem;
 }
+
+@media screen and (max-width:900px){
+    .siteHeader h3{
+        font-size: 3.5rem
+    }
+    .site-info {
+        .button-row{
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+    }
+    .about-site{
+        width: 88vw;
+    }
+}

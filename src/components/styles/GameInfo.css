@@ -82,3 +82,17 @@ h3 {
     top: .25rem;
     
 }
+
+
+@media screen and (max-width:1200px){
+    .about-game{
+        width: 88vw;
+    }
+    .gameinfo-row{
+        flex-direction: column;
+        gap: 2rem
+    }
+    .gameHeader h3{
+        font-size: 3.5rem
+    }
+}
