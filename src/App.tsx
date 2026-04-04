@@ -19,7 +19,8 @@ function App() {
   }, [sectionIndex])
 
   return (
-    <div className='main'>
+      <div className='main'>
+        <canvas id='bg'></canvas>
         <section id="aboutme">
           <div className='about'>
           <h2>Owen Johnston</h2>
@@ -101,7 +102,8 @@ function App() {
 
           </section>
         </div>
-        </div>
+      </div>
+      <script type='module' src = "/src/Three.ts"></script>
         
         
     </div>
