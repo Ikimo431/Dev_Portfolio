@@ -34,8 +34,8 @@ export default function GameInfo({title, images, description, bulletpoints, link
                 <ImageGallery images={images} altPrefix={title} bgColor={galleryBg}></ImageGallery>
                 <div className='about-game' style={{backgroundColor: infoBg}} >
                     <nav className = 'button-row' style={{backgroundColor: infoBg}}>
-                        <button className = 'headerButton' onClick={()=>setInfoIndex(0)} style={{backgroundColor: buttonBg}}>Description</button>
-                        <button className = 'headerButton' onClick={()=>setInfoIndex(1)} style={{backgroundColor: buttonBg}}>Technologies/Skills</button>
+                        <button className='headerButton' onClick={()=>setInfoIndex(0)} style={{backgroundColor: buttonBg}}>Description</button>
+                        <button className='headerButton' onClick={()=>setInfoIndex(1)} style={{backgroundColor: buttonBg}}>Technologies/Skills</button>
                     </nav>
                     <div className = 'slider' style = {{transform: `translateX(-${infoIndex*100}%)`, backgroundColor: infoBg}}>
                         <p style = {{backgroundColor: infoBg}}>{description}</p>
