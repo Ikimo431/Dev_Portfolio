@@ -2,7 +2,7 @@
     position: fixed;
     width: 10vw;
     height:0px;
-    left:0vw;
+    left:45vw;
     top:0;
     background-color: gray;
     z-index: 50;
@@ -15,3 +15,12 @@ canvas{
     background-color: gray;
     z-index: 49;
 }
+.automatonslider{
+    position: absolute;
+    z-index: 60;
+    top: 30%;
+    left: 5%;
+    width: 42.5%;
+    height: 50%;
+}
+

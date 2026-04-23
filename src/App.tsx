@@ -6,7 +6,7 @@ import DevLog from './components/DevLog'
 import './components/styles/AdaptiveAutomaton.css'
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+//import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import ImageGallery from './components/ImageGallery'
 //import modelUrl from '../public/models/AdaptiveAutomaton.glb'
 
@@ -32,23 +32,24 @@ function App() {
     
     
     //-----CAMERA INITIALIZE--------
-    const controls = new OrbitControls(camera, renderer.domElement);
+    //const controls = new OrbitControls(camera, renderer.domElement);
     
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight, false);
     console.log("Window inner width is: " + window.innerWidth)
     let startCameraPos = new THREE.Vector3();
-    let startCameraRot = new THREE.Euler();
+    let camTarget = new THREE.Vector3();
+    //let startCameraRot = new THREE.Euler();
     const mobile = window.innerWidth <= 650
     if(mobile){
       //mobile camera start pos
-      startCameraPos = new THREE.Vector3(-13, 3.92, -11)
-      startCameraRot = new THREE.Euler(-1.88, -1.40, -1.88)
+      startCameraPos = new THREE.Vector3(-14.10, 2.77, -4.43)
+      camTarget = new THREE.Vector3(0.744, 1.661, -2.760)
     }
     else {
       //desktop camera start pos
-      startCameraPos = new THREE.Vector3(-13, 3.92, -11)
-      startCameraRot = new THREE.Euler(-1.88, -1.40, -1.88)
+      startCameraPos = new THREE.Vector3(-13.21, 2.48, -6.76)
+      camTarget = new THREE.Vector3(4.77, 0.319, -9.0945)
     }
     
     //------------------------------LIGTHING------------------------
@@ -87,9 +88,11 @@ function App() {
     
     
     camera.position.copy(startCameraPos)
-    controls.target.set(0,0,0)
-    controls.update()
-    camera.rotation.copy(startCameraRot)
+    //camera.lookAt(4.77, 0.319, -9.0945)
+    camera.lookAt(camTarget.x, camTarget.y, camTarget.z)
+    //controls.target = new THREE.Vector3(0,0,0)
+
+    //camera.rotation.copy(startCameraRot)
     
 
     const clock = new THREE.Clock();
@@ -98,7 +101,7 @@ function App() {
         const delta = clock.getDelta()
         mixers.forEach((mixer) => mixer.update(delta/2));
 
-        controls.update()
+        //controls.update()
         renderer.render(scene, camera);
     }
     animate();
@@ -108,10 +111,11 @@ function App() {
     const debugButton = document.getElementById('debug') as HTMLButtonElement;
     debugButton.addEventListener('click', () => {
       const pos = camera.position;
-      const rot = camera.rotation;
+      //const rot = camera.rotation;
 
       console.log(`Camera Position: x=${pos.x.toFixed(2)}, y=${pos.y.toFixed(2)}, z=${pos.z.toFixed(2)}`);
-      console.log(`Camera Rotation: x=${rot.x.toFixed(2)}, y=${rot.y.toFixed(2)}, z=${rot.z.toFixed(2)}`);
+      //console.log(`Camera Rotation: x=${rot.x.toFixed(2)}, y=${rot.y.toFixed(2)}, z=${rot.z.toFixed(2)}`);
+      //console.log(controls.target)
     }); 
   }, [])
 
@@ -140,9 +144,7 @@ function App() {
       <div className='main'>
         <article id="AdaptiveAutomatonExtra" style={{overflow: 'hidden'}}>
              <button id='debug' style={{position: "fixed", zIndex: 500}}>debug</button>
-             <div className = 'automatonslider' style = {{position:"absolute", zIndex: 60, top: "10%", left:"15%",
-              width: "35%", height: "25%"
-             }}>
+             <div className = 'automatonslider' style = {{display: canvasVisible? "block": 'none'}}>
                 <ImageGallery images={["AdaptiveAutomatonTitle.png", "AdaptiveAutomatonAdaptDiagram.png", "AdaptiveAutomatonClassDiagram.png"]}></ImageGallery>
              </div>
              <canvas id='bg' style={{display: canvasVisible? "block": 'none'}}></canvas>
