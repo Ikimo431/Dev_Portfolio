@@ -221,7 +221,7 @@ function App() {
                     bulletpoints={["Python simulation utilizing Pytorch to train models and export in .onnx format", "Webpage created with Vue to evaluate models",
                       "Game made in unity, with onnx models imported through Barracuda"
                     ]}
-                    link="TODO"
+                    link="https://ikimo431.itch.io/adaptiveautomaton"
                     mainBg='#4d413b' headerBg='#d9904c'  galleryBg='#905f31' infoBg= '#afadac'
 
             ></GameInfo>
