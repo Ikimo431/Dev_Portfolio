@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     width: 100vw;
+    padding-inline: 5vw;
     
 
 }
@@ -20,6 +21,7 @@
     justify-content: space-between;
     padding-left: 1rem;
     padding-right: 3rem;
+    border-radius: 1rem;
 }
 
 a {
@@ -52,7 +54,7 @@ a {
     }
 }
 p, li, button{
-    font-size: 2rem;
+    font-size: 1.25rem;
 }
 .button-row {
     display: flex;
@@ -85,6 +87,7 @@ h3 {
 
 
 @media screen and (max-width:1200px){
+    
     .about-game{
         width: 88vw;
     }

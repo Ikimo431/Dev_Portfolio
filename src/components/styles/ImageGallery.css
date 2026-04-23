@@ -16,13 +16,33 @@
     border-radius: 0.2rem;
     position: relative;
 }
+.img-slider-caption{
+    display: flex;
+    align-items: center;
+    max-width: 50vw;
+    max-height: 100vh;
+    .ImageWCaption{
+        max-width: 100%;
+    }
+ 
+    overflow: hidden;
+    border-radius: 0.2rem;
+    position: relative;
+}
 .slider-track img {
     min-width: 100%;
     border-radius: .5rem;
 }
+
 .slider-track{
     display: flex;
     transition: transform 0.5s ease-in-out
+}
+.slider-track-caption {
+    transition: transform 0.5s ease-in-out;
+    display: flex;
+    flex-direction: row;
+    width: 300%
 }
 
 .arrow {
@@ -73,6 +93,22 @@
 .dot.active {
   background: #0f172a;
 }
+
+.ImageWCaption{
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+    border-radius:.5rem;
+    padding-bottom: 1rem;
+    img {
+        max-width: 100%;
+        min-width: 100%;
+    }
+    p{
+        text-align: center;
+    }
+}
+
 
 @media screen and (max-width:900px){
     .img-slider{

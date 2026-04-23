@@ -133,19 +133,32 @@ function App() {
   async function OpenAutomatonArticle(){
     const sleep = async (ms: number) => new Promise(resolve=>setTimeout(resolve, ms))
     const element: HTMLElement = document.querySelector("#AdaptiveAutomatonExtra") as HTMLElement
+    setCanvasVisible(true)
     element.style.height = "100vh"
     await sleep(1000)
     element.style.width = "100vw"
     element.style.left = "0px"
-    setCanvasVisible(true)
+    
+  }
+
+  function CloseAutomatonArticle(){
+    const element: HTMLElement = document.querySelector("#AdaptiveAutomatonExtra") as HTMLElement
+    element.style.height = "0px"
+    element.style.width = "0px"
+    element.style.left = "45vw"
+    setCanvasVisible(false)
   }
 
   return (
       <div className='main'>
         <article id="AdaptiveAutomatonExtra" style={{overflow: 'hidden'}}>
-             <button id='debug' style={{position: "fixed", zIndex: 500}}>debug</button>
+             <button id='debug' style={{position: "fixed", zIndex: 500, display: canvasVisible?"block": "none"}}>debug</button>
+             <button id ='closeAutomaton' style = {{position: "fixed", zIndex: 502, display: canvasVisible? "block": 'none'}}
+              onClick={()=>{CloseAutomatonArticle()}}
+             >Close</button>
              <div className = 'automatonslider' style = {{display: canvasVisible? "block": 'none'}}>
-                <ImageGallery images={["AdaptiveAutomatonTitle.png", "AdaptiveAutomatonAdaptDiagram.png", "AdaptiveAutomatonClassDiagram.png"]}></ImageGallery>
+                <ImageGallery images={["AdaptiveAutomatonTitle.png", "AdaptiveAutomatonAdaptDiagram.png", "AdaptiveAutomatonClassDiagram.png"]}
+                captions={["Title Screen", "Adaptation Method Diagram", "Simulaiton Class Diagram"]}></ImageGallery>
              </div>
              <canvas id='bg' style={{display: canvasVisible? "block": 'none'}}></canvas>
         </article>
@@ -209,7 +222,7 @@ function App() {
                       "Game made in unity, with onnx models imported through Barracuda"
                     ]}
                     link="TODO"
-                    mainBg='#afadac' headerBg='#d9904c'  galleryBg='#905f31' infoBg= '#afadac'
+                    mainBg='#4d413b' headerBg='#d9904c'  galleryBg='#905f31' infoBg= '#afadac'
 
             ></GameInfo>
             <button onClick={()=>{OpenAutomatonArticle()}}>See More</button>
@@ -219,10 +232,10 @@ function App() {
             images={["title.png", "room.png", "Death'sJanitorBattle.png"]} 
             bulletpoints={["Made using gamemaker", "Card based combat with fluid animation", "Sprites made using LibreSprite", "Original music made with LMMS and Ableton Live"]} 
             link="https://ikimo431.itch.io/deaths-janitor"
-            mainBg='#827e7d' headerBg='#735b30' galleryBg='#4d2020' infoBg='#733232'
+            mainBg='#160b0b' headerBg='#735b30' galleryBg='#4d2020' infoBg='#733232'
             caseStudy="Death'sJanitor_CaseStudyDTCT.pdf"
             ></GameInfo>
-            <DevLog backgroundColor='#4d2020' entries={[
+            <DevLog mainBg='#160b0b'backgroundColor='#4d2020' entries={[
             {
               date: "01/03/2026",
               bulletpoints: ["Created new animated battle idle sprites for undead knight and zombie", "Added battle_sprite variable to enemy parent to support using different sprite in battle"]

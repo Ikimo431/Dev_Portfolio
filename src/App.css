@@ -44,6 +44,9 @@
 section > article:last-child{
     
 }
+#games{
+    justify-content: center;
+}
 
 @media screen and (max-width:900px){
     #aboutme{

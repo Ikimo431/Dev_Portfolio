@@ -18,9 +18,20 @@ canvas{
 .automatonslider{
     position: absolute;
     z-index: 60;
-    top: 30%;
-    left: 5%;
-    width: 42.5%;
-    height: 50%;
+    top: 10%;
+    left: 10%;
+    width: 30%;
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 900px) {
+    .automatonslider{
+        top:25%;
+        left:5%;
+        width:42.5%;
+        height: 50%
+    }
 }
 

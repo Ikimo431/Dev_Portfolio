@@ -8,6 +8,7 @@ import { useState } from "react";
 type DevLogProps = {
     entries: LogEntry[];
     backgroundColor: string
+    mainBg: string
 }
 type LogEntry = {
     date: String;
@@ -21,11 +22,12 @@ type LogEntryProps = {
 
 //MAIN
 
-export default function DevLog({entries, backgroundColor}: DevLogProps) {
+export default function DevLog({entries, backgroundColor, mainBg}: DevLogProps) {
     const [logVisible, setLogVisible] = useState(false);
     console.log("BACKGROUND COLOR " + backgroundColor)
     return (
-        <section className = "devLog" style = {{backgroundColor: backgroundColor, overflow:"hidden"}}>
+        <section className = "devLog" style = {{backgroundColor: mainBg, overflow:"hidden"}}>
+            <div className = "devLogInner" style = {{width:"100%", height:"100%", backgroundColor: backgroundColor}}>
             <label  className = 'devLogLabel' htmlFor = 'carrotDropdown'>Dev Log</label>
             <button className = 'logCarrot' style={{transform: logVisible? 'rotate(90deg)' : 'rotate(0deg)',}}
             onClick={()=>{setLogVisible(!logVisible)}}
@@ -37,7 +39,7 @@ export default function DevLog({entries, backgroundColor}: DevLogProps) {
                 : null
                 
             }
-            
+            </div>
                 
         </section>
     )
