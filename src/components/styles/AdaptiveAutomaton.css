@@ -1,13 +1,21 @@
 #AdaptiveAutomatonExtra{
     position: fixed;
-    width: 10vw;
-    height:0px;
-    left:45vw;
+    width: 100vw;
+    height:100vh;
+    left:0vw;
     top:0;
     background-color: gray;
     z-index: 50;
 
-    transition: width .75s, height .75s, left 0.75s
+    transition: width .75s, height .75s, left 0.75s, transform 0.75s, clip-path 0.75s ease;
+    
+    clip-path: inset(100% 45% 100% 45%);
+}
+#AdaptiveAutomatonExtra.sliceOpen{
+    clip-path: inset(0 45% 0 45%);
+}
+#AdaptiveAutomatonExtra.open{
+    clip-path: inset(0 0% 0 0%);
 }
 canvas{
     width: 100%;

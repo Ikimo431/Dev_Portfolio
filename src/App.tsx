@@ -9,19 +9,28 @@ import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
 //import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import ImageGallery from './components/ImageGallery'
 //import modelUrl from '../public/models/AdaptiveAutomaton.glb'
+import bgUrl from './assets/images/AdaptiveAutomatonBG.png'
 
 function App() {
   //const base = import.meta.env.BASE_URL
 
   const [sectionIndex, setSectionIndex] = useState(0)
+  const [canvasSlice, setCanvasSlice] = useState(false)
   const [canvasVisible, setCanvasVisible] = useState(false)
+  const [canvasOpen, setCanvasOpen] = useState(false)
+  //const [transitioning, setTransitioning] = useState(false)
+  //const [targetPosition, setTargetPosition] = useState(new THREE.Vector3())
+  //const [targetLook, setTargetLook] = useState(new THREE.Vector3())
   const mixers: THREE.AnimationMixer[] = [];
+  let idleAction: THREE.AnimationAction | null = null;
+  let attackAction: THREE.AnimationAction | null = null;
   useEffect(()=> {
+    
     const scene = new THREE.Scene();
-    const grid = new THREE.GridHelper(50, 50);
-    scene.add(grid);
-    const axes = new THREE.AxesHelper(5);
-    scene.add(axes);
+    //const grid = new THREE.GridHelper(50, 50);
+    //scene.add(grid);
+    //const axes = new THREE.AxesHelper(5);
+    //scene.add(axes);
     const modelLoader = new GLTFLoader();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     
@@ -42,22 +51,42 @@ function App() {
     //let startCameraRot = new THREE.Euler();
     const mobile = window.innerWidth <= 650
     if(mobile){
-      //mobile camera start pos
+      //mobilecamera before attack 
+      startCameraPos = new THREE.Vector3(-5.44, 4.90, -6.70)
+      camTarget = new THREE.Vector3(3.066, 2.878, -3.049)
+
+      //mobile camera start pos after attack
       startCameraPos = new THREE.Vector3(-14.10, 2.77, -4.43)
       camTarget = new THREE.Vector3(0.744, 1.661, -2.760)
     }
     else {
       //desktop camera start pos
-      startCameraPos = new THREE.Vector3(-13.21, 2.48, -6.76)
-      camTarget = new THREE.Vector3(4.77, 0.319, -9.0945)
+      //for attack animation 
+      startCameraPos = new THREE.Vector3(-6.6, 1.56, -9.45)
+      camTarget = new THREE.Vector3(1.905, 1.804, -3.615)
+      //after attack animation
+      //await sleep(1500)
+      //moveCameraToPosition(new THREE.Vector3(-13.21, 2.48, -6.76),
+      //new THREE.Vector3(4.77, 0.319, -9.0945), camera)
+      //startCameraPos = new THREE.Vector3(-13.21, 2.48, -6.76)
+      //camTarget = new THREE.Vector3(4.77, 0.319, -9.0945)
     }
+    //------------------------TEXTURE BACKGROUND-----------------------
+    const loader = new THREE.TextureLoader();
+    const bgTexture = loader.load(
+      bgUrl,
+      () => console.log('Background loaded!'),
+      undefined,
+      err => console.error('Error loading texture:', err)
+    );
+    scene.background = bgTexture
     
     //------------------------------LIGTHING------------------------
     const ambientLight = new THREE.AmbientLight(0x404040, 5000); 
     scene.add(ambientLight);
     const pl1 = new THREE.PointLight(0x404040, 3000)
-    const helper = new THREE.PointLightHelper( pl1, 5 );
-    scene.add( helper );
+    //const helper = new THREE.PointLightHelper( pl1, 5 );
+    //scene.add( helper );
     pl1.position.copy(new THREE.Vector3(-2,8,-2))
     scene.add(pl1)
     const pl2 = new THREE.PointLight(0xFF8844, 50)
@@ -74,11 +103,14 @@ function App() {
       model.scale.set(1,1,1)
       model.rotation.y = -Math.PI/3
       const mixer = new THREE.AnimationMixer(model);
+      const attack = gltf.animations[0]
+      const idle = gltf.animations[3]
+      attackAction = mixer.clipAction(attack);
+      idleAction = mixer.clipAction(idle);
 
-      const idle = gltf.animations[3]; // usually first is idle
-      const action = mixer.clipAction(idle);
+      //const action = mixer.clipAction(attack);
 
-      action.play(); // start animation
+      //action.play(); // start animation
 
       // store mixer so we can update it in animate loop
       mixers.push(mixer);
@@ -98,11 +130,23 @@ function App() {
     const clock = new THREE.Clock();
     function animate(){
         requestAnimationFrame(animate);
+        //   if (transitioning) {
+      
+        //     camera.position.lerp(targetPosition, 0.03);
+
+        //     camera.lookAt(targetLook)
+
+        //     if (camera.position.distanceTo(targetPosition) < 0.01) {
+        //       camera.position.copy(targetPosition);
+        //       setTransitioning(false)
+        //   }
+        // }
         const delta = clock.getDelta()
-        mixers.forEach((mixer) => mixer.update(delta/2));
+        mixers.forEach((mixer) => mixer.update(delta));
 
         //controls.update()
         renderer.render(scene, camera);
+        //console.log(attackAction?.time, attackAction?.getClip().duration);
     }
     animate();
 
@@ -133,34 +177,97 @@ function App() {
   async function OpenAutomatonArticle(){
     const sleep = async (ms: number) => new Promise(resolve=>setTimeout(resolve, ms))
     const element: HTMLElement = document.querySelector("#AdaptiveAutomatonExtra") as HTMLElement
+    
+    if (attackAction!= null && idleAction!=null){
+      idleAction?.stop();
+      startAutomatonAnimation(attackAction)
+    }
+    setCanvasSlice(true)
     setCanvasVisible(true)
-    element.style.height = "100vh"
+    element.offsetHeight;
     await sleep(1000)
-    element.style.width = "100vw"
-    element.style.left = "0px"
+    
+    setCanvasOpen(true)
+    await sleep(1500)
+    if (attackAction!= null && idleAction!=null){
+      AutomotanIdleLoop(attackAction, idleAction);
+    }
+    
+    // //element.style.height = "100vh"
+    // element.style.transform = "scale(0.1,1)"
+    // await sleep(1000)
+    // //element.style.width = "100vw"
+    // element.style.transform = "scale(1,1)"
+    // element.style.left = "0px"
     
   }
 
   function CloseAutomatonArticle(){
-    const element: HTMLElement = document.querySelector("#AdaptiveAutomatonExtra") as HTMLElement
-    element.style.height = "0px"
-    element.style.width = "0px"
-    element.style.left = "45vw"
+    // const element: HTMLElement = document.querySelector("#AdaptiveAutomatonExtra") as HTMLElement
+    // element.style.transform = "scale(0,0)"
+    // //element.style.width = "0px"
+    
+    // element.style.left = "45vw"
     setCanvasVisible(false)
+    setCanvasSlice(false)
+    setCanvasOpen(false)
   }
 
+  // function moveCameraToPosition(position: THREE.Vector3, target: THREE.Vector3, camera: THREE.Camera){
+  //   camera.lookAt(target)
+  //   camera.position.copy(targetPosition)
+  //   setTargetPosition(position)
+  //   setTargetLook(target)
+  //   setTransitioning(true)
+  // }
+
+  function startAutomatonAnimation(attackAction: THREE.AnimationAction){
+    console.log("Attack triggered")
+    attackAction.reset();
+    attackAction.setLoop(THREE.LoopOnce, 1);
+    attackAction.clampWhenFinished = false;
+    attackAction.enabled = true
+    attackAction.play()
+
+    //const onFinished = () => {
+      //console.log("FINISH EVENT FIRED")
+      // if (attackAction.time>=attackAction.getClip().duration-.05 || 1){
+      //   console.log("switching to idle animation")
+        
+
+      //   idleAction.reset()
+      //   idleAction.setLoop(THREE.LoopRepeat, Infinity)
+      //   idleAction.play()
+
+      //   //mixer.removeEventListener("finished", onFinished)
+      // }
+    //}
+    //mixer.addEventListener("finished", onFinished)
+
+  }
+  function AutomotanIdleLoop(attackAction: THREE.AnimationAction, idleAction: THREE.AnimationAction){
+    if (attackAction.time>=attackAction.getClip().duration-.1 || 1){
+        console.log("switching to idle animation")
+        idleAction.reset()
+        idleAction.setLoop(THREE.LoopRepeat, Infinity)
+        idleAction.play()
+      }
+  }
   return (
       <div className='main'>
-        <article id="AdaptiveAutomatonExtra" style={{overflow: 'hidden'}}>
-             <button id='debug' style={{position: "fixed", zIndex: 500, display: canvasVisible?"block": "none"}}>debug</button>
+        <article id="AdaptiveAutomatonExtra" className={canvasOpen? "open" : (canvasSlice? "sliceOpen": "")} style={{overflow: 'hidden', width: '100vw'}}>
+             <button id='debug' style={{position: "fixed", zIndex: -500, display: canvasVisible?"block": "none"}}>debug</button>
              <button id ='closeAutomaton' style = {{position: "fixed", zIndex: 502, display: canvasVisible? "block": 'none'}}
               onClick={()=>{CloseAutomatonArticle()}}
              >Close</button>
              <div className = 'automatonslider' style = {{display: canvasVisible? "block": 'none'}}>
-                <ImageGallery images={["AdaptiveAutomatonTitle.png", "AdaptiveAutomatonAdaptDiagram.png", "AdaptiveAutomatonClassDiagram.png"]}
-                captions={["Title Screen", "Adaptation Method Diagram", "Simulaiton Class Diagram"]}></ImageGallery>
+                <ImageGallery images={["AdaptiveAutomatonSiteScreenshot.png", "AdAutoItch.png", "AdAutoProjectDiagram.png", "AdaptiveAutomatonAdaptDiagram.png"]}
+                captions={["The site used for viewing model behaviour to help with evaluation is available at https://ikimo431.github.io/AIFighterPredictions/", 
+                "Download from https://ikimo431.itch.io/adaptiveautomaton to try it yourself! The python simulation is packaged with the game so adaption works with a single download.",
+                "Overview diagram of how each part of the project is connected.",
+                "Data flow diagram of how each adaptation method works."]}></ImageGallery>
              </div>
-             <canvas id='bg' style={{display: canvasVisible? "block": 'none'}}></canvas>
+             <canvas id='bg' style={{display: canvasVisible? "block": 'none', width:"100vw", height: "100vh"}}></canvas>
         </article>
         <section id="aboutme">
           <div className='about'>
@@ -225,7 +332,9 @@ function App() {
                     mainBg='#4d413b' headerBg='#d9904c'  galleryBg='#905f31' infoBg= '#afadac'
 
             ></GameInfo>
-            <button onClick={()=>{OpenAutomatonArticle()}}>See More</button>
+            <div style = {{display: 'flex', justifyContent: 'center', backgroundColor: '#4d413b'}}>
+              <button onClick={()=>{OpenAutomatonArticle()}}>See More</button>
+            </div>
           
             <GameInfo title="Death's Janitor" description="Play as death's janitor in this deckbuilding RPG. Gain new cards and grow stronger as 
                           you explore the crypts and clean up the undead." 

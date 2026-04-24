@@ -81,7 +81,7 @@ export default function ImageGallery({images, altPrefix = 'Gallery Image', bgCol
                         />
                         {
                             captions.length>0? 
-                            (<p>{captions[index]}</p>)
+                            (<p style = {{overflowWrap: 'anywhere' }}>{captions[index]}</p>)
                             : (null)
                         }
                     </div>

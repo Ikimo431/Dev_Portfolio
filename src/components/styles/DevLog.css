@@ -6,10 +6,15 @@
 .logCarrot{
 
 }
+.devLog{
+    justify-content: center;
+    display: flex;
+    border-radius: .25rem;
+}
 .devLogInner{
     padding: 2rem 0;
-    margin-left: 5rem;
-    margin-right: 200rem;
+    max-width: 90%;
+    border-radius: .5rem;
 }
 .logEntry{
     color:white;
